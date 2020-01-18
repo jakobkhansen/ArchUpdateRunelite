@@ -6,8 +6,8 @@ mv RuneLite.AppImage Old.AppImage
 
 echo "Downloading latest Runelite AppImage"
 curl -s https://api.github.com/repos/runelite/launcher/releases/latest \
-| grep "browser_download_url.*AppImage" \
-| cut -d : -f 2,3 \
-| tr -d \" \
-| wget -qi -
+| grep -E "browser_download_url.*RuneLite.AppImage" \
+| sed -e "s/^.*: //" \
+| sed -r 's/[\"]+//g' \
+| wget -qi - --show-progress
 sudo chmod +x RuneLite.AppImage
